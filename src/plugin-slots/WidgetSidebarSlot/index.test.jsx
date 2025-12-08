@@ -1,45 +1,38 @@
-import React from 'react';
-import { PluginSlot } from '@openedx/frontend-plugin-framework';
-import LookingForChallengeWidget from 'plugins/LookingForChallengeWidget';
+import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
 
-export const WidgetSidebarSlot = () => (
-  <PluginSlot id="org.openedx.frontend.learner_dashboard.widget_sidebar.v1">
-    <div
-      style={{
-        display: 'flex',
-        gap: '15px',       // расстояние между виджетами
-        alignItems: 'flex-start',
-      }}
-    >
-      {/* Старый виджет */}
-      <div style={{ flex: 1 }}>
-        <LookingForChallengeWidget />
-      </div>
+const config = {
+  pluginSlots: {
+     'org.openedx.frontend.learner_dashboard.widget_sidebar.v1': {
+      // Hide the default LookingForChallenge component
+      keepDefault: false,
+      plugins: [
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: 'custom_sidebar_panel',
+            type: DIRECT_PLUGIN,
+            priority: 60,
+            RenderWidget: () => (
+              <div>
+                <h3>
+                  Sidebar Menu
+                </h3>
+                <p>
+                  sidebar item #1
+                </p>
+                <p>
+                  sidebar item #2
+                </p>
+                <p>
+                  sidebar item #3
+                </p>
+              </div>
+            ),
+          },
+        },
+      ],
+    },
+  },
+}
 
-      {/* Новый виджет Telegram */}
-      <div style={{ flex: 1, textAlign: 'center' }} data-testid="telegram-widget">
-        <a
-          href="https://t.me/kaznuopen"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            textDecoration: 'none',
-            color: '#ffffff',
-            backgroundColor: '#0088cc',
-            padding: '10px 20px',
-            borderRadius: '6px',
-            fontWeight: 'bold',
-            display: 'inline-block',
-            transition: 'background-color 0.3s',
-          }}
-          onMouseOver={e => (e.currentTarget.style.backgroundColor = '#00aaff')}
-          onMouseOut={e => (e.currentTarget.style.backgroundColor = '#0088cc')}
-        >
-          Присоединиться к группе
-        </a>
-      </div>
-    </div>
-  </PluginSlot>
-);
-
-export default WidgetSidebarSlot;
+export default config;

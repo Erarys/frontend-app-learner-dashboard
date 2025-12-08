@@ -1,38 +1,22 @@
-import { DIRECT_PLUGIN, PLUGIN_OPERATIONS } from '@openedx/frontend-plugin-framework';
+import { render, screen } from '@testing-library/react';
 
-const config = {
-  pluginSlots: {
-     'org.openedx.frontend.learner_dashboard.widget_sidebar.v1': {
-      // Hide the default LookingForChallenge component
-      keepDefault: false,
-      plugins: [
-        {
-          op: PLUGIN_OPERATIONS.Insert,
-          widget: {
-            id: 'custom_sidebar_panel',
-            type: DIRECT_PLUGIN,
-            priority: 60,
-            RenderWidget: () => (
-              <div>
-                <h3>
-                  Sidebar Menu
-                </h3>
-                <p>
-                  sidebar item #1
-                </p>
-                <p>
-                  sidebar item #2
-                </p>
-                <p>
-                  sidebar item #3
-                </p>
-              </div>
-            ),
-          },
-        },
-      ],
-    },
+import { IntlProvider } from '@edx/frontend-platform/i18n';
+import { reduxHooks } from 'hooks';
+import WidgetSidebarSlot from '.';
+
+jest.mock('hooks', () => ({
+  reduxHooks: {
+    usePlatformSettingsData: jest.fn(),
   },
-}
+}));
 
-export default config;
+const courseSearchUrl = 'mock-url';
+
+describe('WidgetSidebar', () => {
+  it('renders PluginSlot with correct children', () => {
+    reduxHooks.usePlatformSettingsData.mockReturnValueOnce({ courseSearchUrl });
+    render(<IntlProvider locale="en"><WidgetSidebarSlot /></IntlProvider>);
+    const pluginSlot = screen.getByText('Looking for a new challenge?');
+    expect(pluginSlot).toBeDefined();
+  });
+});

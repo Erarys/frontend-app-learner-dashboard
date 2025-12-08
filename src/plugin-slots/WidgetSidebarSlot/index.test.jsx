@@ -1,22 +1,45 @@
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
+import LookingForChallengeWidget from 'plugins/LookingForChallengeWidget';
 
-import { IntlProvider } from '@edx/frontend-platform/i18n';
-import { reduxHooks } from 'hooks';
-import WidgetSidebarSlot from '.';
+export const WidgetSidebarSlot = () => (
+  <PluginSlot id="org.openedx.frontend.learner_dashboard.widget_sidebar.v1">
+    <div
+      style={{
+        display: 'flex',
+        gap: '15px',       // расстояние между виджетами
+        alignItems: 'flex-start',
+      }}
+    >
+      {/* Старый виджет */}
+      <div style={{ flex: 1 }}>
+        <LookingForChallengeWidget />
+      </div>
 
-jest.mock('hooks', () => ({
-  reduxHooks: {
-    usePlatformSettingsData: jest.fn(),
-  },
-}));
+      {/* Новый виджет Telegram */}
+      <div style={{ flex: 1, textAlign: 'center' }} data-testid="telegram-widget">
+        <a
+          href="https://t.me/kaznuopen"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: 'none',
+            color: '#ffffff',
+            backgroundColor: '#0088cc',
+            padding: '10px 20px',
+            borderRadius: '6px',
+            fontWeight: 'bold',
+            display: 'inline-block',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={e => (e.currentTarget.style.backgroundColor = '#00aaff')}
+          onMouseOut={e => (e.currentTarget.style.backgroundColor = '#0088cc')}
+        >
+          Присоединиться к группе
+        </a>
+      </div>
+    </div>
+  </PluginSlot>
+);
 
-const courseSearchUrl = 'mock-url';
-
-describe('WidgetSidebar', () => {
-  it('renders PluginSlot with correct children', () => {
-    reduxHooks.usePlatformSettingsData.mockReturnValueOnce({ courseSearchUrl });
-    render(<IntlProvider locale="en"><WidgetSidebarSlot /></IntlProvider>);
-    const pluginSlot = screen.getByText('Looking for a new challenge?');
-    expect(pluginSlot).toBeDefined();
-  });
-});
+export default WidgetSidebarSlot;

@@ -5,20 +5,22 @@ import LookingForChallengeWidget from 'widgets/LookingForChallengeWidget';
 
 export const WidgetSidebarSlot = () => (
   <>
-    <div style={{ padding: '8px 0', color: 'red' }}>
-      Привет, мир! (test)
-    </div>
-
     {/* Блок Telegram */}
     <div style={{
-      padding: '16px 20px',
-      marginBottom: '16px',
-      borderRadius: '8px',
-      background: '#ffffff',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-      border: '1px solid #eee'
+      padding: '18px 22px',
+      marginBottom: '18px',
+      borderRadius: '12px',
+      background: 'linear-gradient(135deg, #e8f3ff 0%, #ffffff 100%)',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+      border: '1px solid #dceaff',
+      transition: '0.2s ease',
     }}>
-      <h3 style={{ margin: '0 0 6px 0', fontSize: '16px', fontWeight: 600 }}>
+      <h3 style={{
+        margin: '0 0 8px 0',
+        fontSize: '17px',
+        fontWeight: 600,
+        color: '#0a3d7c'
+      }}>
         Теперь мы в Telegram
       </h3>
 
@@ -29,10 +31,10 @@ export const WidgetSidebarSlot = () => (
         style={{
           display: 'inline-flex',
           alignItems: 'center',
-          fontSize: '14px',
+          fontSize: '15px',
           fontWeight: 500,
-          color: '#0a7cff',
-          textDecoration: 'none'
+          color: '#0077ff',
+          textDecoration: 'none',
         }}
       >
         Перейти в группу →

@@ -8,6 +8,9 @@ jest.mock('@openedx/frontend-plugin-framework', () => ({
   PluginSlot: 'PluginSlot',
 }));
 
+// Простой тестовый вывод текста
+console.log("Привет, мир!");
+
 describe('WidgetSidebar', () => {
   beforeEach(() => jest.resetAllMocks());
 

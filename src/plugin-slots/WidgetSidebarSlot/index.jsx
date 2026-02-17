@@ -1,57 +1,43 @@
 import React from 'react';
-
-import {PluginSlot} from '@openedx/frontend-plugin-framework';
-import LookingForChallengeWidget from 'widgets/LookingForChallengeWidget';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
+import LookingForChallengeWidget from 'plugins/LookingForChallengeWidget';
 
 export const WidgetSidebarSlot = () => (
-    <>
-        {/* Блок Telegram */}
-        <div style={{
-            padding: '20px 22px',
-            marginBottom: '18px',
-            borderRadius: '12px',
-            background: `linear-gradient(135deg, #e8f3ff 0%, #ffffff 100%), url(${telegramIcon})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right 12px center',
-            backgroundSize: '48px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
-            border: '1px solid #dceaff',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px'
-        }}>
-
-            <h3 style={{
-                margin: 0,
-                fontSize: '17px',
-                fontWeight: 600,
-                color: '#0a3d7c'
-            }}>
-                Теперь мы в Telegram
-            </h3>
-
-            <a
-                href="https://t.me/kaznuopen"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                    fontSize: '15px',
-                    fontWeight: 500,
-                    color: '#0077ff',
-                    textDecoration: 'none'
-                }}
-            >
-                Перейти в группу →
-            </a>
-        </div>
-
-        <PluginSlot
-            id="org.openedx.frontend.learner_dashboard.widget_sidebar.v1"
-            idAliases={['widget_sidebar_slot']}
+  <PluginSlot id="org.openedx.frontend.learner_dashboard.widget_sidebar.v1">
+    <div
+      style={{
+        display: 'flex',
+        gap: '15px',       // расстояние между виджетами
+        alignItems: 'flex-start',
+      }}
+    >
+      {/* Старый виджет */}
+      <div style={{ flex: 1 }}>
+        <LookingForChallengeWidget />
+      </div>
+       {/* Новый виджет Telegram */}
+      <div style={{ flex: 1, textAlign: 'center' }} data-testid="telegram-widget">
+        <a
+          href="https://t.me/kaznuopen"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            textDecoration: 'none',
+            color: '#ffffff',
+            backgroundColor: '#0088cc',
+            padding: '10px 20px',
+            borderRadius: '6px',
+            fontWeight: 'bold',
+            display: 'inline-block',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={e => (e.currentTarget.style.backgroundColor = '#00aaff')}
+          onMouseOut={e => (e.currentTarget.style.backgroundColor = '#0088cc')}
         >
-            <LookingForChallengeWidget/>
-        </PluginSlot>
-    </>
+          Присоединиться к группе
+        </a>
+      </div>
+    </div>
+  </PluginSlot>
 );
-
 export default WidgetSidebarSlot;

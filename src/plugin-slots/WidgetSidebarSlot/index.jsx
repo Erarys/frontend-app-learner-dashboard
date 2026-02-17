@@ -1,6 +1,6 @@
 import React from 'react';
 import { PluginSlot } from '@openedx/frontend-plugin-framework';
-import LookingForChallengeWidget from 'plugins/LookingForChallengeWidget';
+import LookingForChallengeWidget from 'widgets/LookingForChallengeWidget';
 
 export const WidgetSidebarSlot = () => (
   <PluginSlot id="org.openedx.frontend.learner_dashboard.widget_sidebar.v1">
